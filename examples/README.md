@@ -1,13 +1,13 @@
-# opencv-js-react Examples
+# @robomous/opencv-react Examples
 
-Self-contained code examples showing how to use the `opencv-js-react` library. Copy any file into your own React project that has `opencv-js-react` installed.
+Self-contained code examples showing how to use the `@robomous/opencv-react` library. Copy any file into your own React project that has `@robomous/opencv-react` installed.
 
 ## Prerequisites
 
 ```bash
-npm install opencv-js-react react react-dom
+npm install @robomous/opencv-react react react-dom
 # or
-pnpm add opencv-js-react react react-dom
+pnpm add @robomous/opencv-react react react-dom
 ```
 
 ---
