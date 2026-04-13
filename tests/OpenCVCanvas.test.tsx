@@ -62,7 +62,7 @@ describe('OpenCVCanvas', () => {
     it('calls onError when image fails to load', async () => {
       // Override Image mock to trigger error instead of load
       const OriginalImage = global.Image;
-      global.Image = vi.fn().mockImplementation(() => {
+      global.Image = vi.fn(function(this: unknown) {
         const img: Partial<HTMLImageElement> = {};
         Object.defineProperty(img, 'src', {
           set() {
@@ -209,7 +209,7 @@ describe('OpenCVCanvas', () => {
       const OriginalImage = global.Image;
       const triggers: Array<() => void> = [];
 
-      global.Image = vi.fn().mockImplementation(() => {
+      global.Image = vi.fn(function(this: unknown) {
         const img: Partial<HTMLImageElement> = {
           naturalWidth: 100,
           naturalHeight: 100,

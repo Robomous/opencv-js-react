@@ -105,21 +105,22 @@ describe('useOpenCV', () => {
         await r1.current.load();
       });
 
-      // Second hook instance should not inject another script
-      const appendSpy = vi.spyOn(document.head, 'appendChild');
+      // Second hook instance should not inject another script.
+      // In Vitest v4, vi.spyOn on an already-spied method returns the same spy
+      // object (shared call history), so we verify via the DOM instead.
+      spy.mockClear();
       const { result: r2 } = renderHook(() => useOpenCV({ autoLoad: false }));
       await act(async () => {
         await r2.current.load();
       });
 
-      // No new script appended
-      const scriptAppends = appendSpy.mock.calls.filter(
+      // No new script appended after the clear point
+      const scriptAppends = spy.mock.calls.filter(
         ([node]) => node instanceof HTMLScriptElement,
       );
       expect(scriptAppends).toHaveLength(0);
 
       spy.mockRestore();
-      appendSpy.mockRestore();
     });
   });
 

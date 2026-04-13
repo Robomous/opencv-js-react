@@ -42,7 +42,10 @@ HTMLCanvasElement.prototype.getContext = vi.fn(
 export function mockImageLoad(naturalWidth = 100, naturalHeight = 100) {
   const originalImage = global.Image;
 
-  const MockImage = vi.fn().mockImplementation(() => {
+  // Regular function (not arrow) required: vi.fn() called with `new` in Vitest v4
+  // passes the constructor call through to the implementation, and arrow functions
+  // cannot be constructors.
+  const MockImage = vi.fn(function MockImageImpl(this: unknown) {
     const img: Partial<HTMLImageElement> & { _triggerLoad?: () => void; _triggerError?: () => void } = {
       naturalWidth,
       naturalHeight,
